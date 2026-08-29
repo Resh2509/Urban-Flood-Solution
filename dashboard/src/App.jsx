@@ -5,9 +5,113 @@ import "maplibre-gl/dist/maplibre-gl.css";
 
 function App() {
   const mapContainer = useRef(null);
-  const [message, setMessage] = useState("Loading map...");
 
+  // Store map and markers
+  const mapRef = useRef(null);
+  const nodeMarkersRef = useRef([]);
+
+  const [message, setMessage] = useState("Loading map...");
+  const [selectedTime, setSelectedTime] = useState("current");
+
+  // =========================================================
+  // DAY 4: GET THE CORRECT MEMBER 1 DEPTH FOR SELECTED TIME
+  // =========================================================
+  const getSelectedDepth = (prediction, time) => {
+    if (time === "current") {
+      return prediction.current_depth || "N/A";
+    }
+
+    if (time === "15") {
+      return prediction.depth_15min || "N/A";
+    }
+
+    if (time === "30") {
+      return prediction.depth_30min || "N/A";
+    }
+
+    if (time === "45") {
+      return prediction.depth_45min || "N/A";
+    }
+
+    return "N/A";
+  };
+
+  const getSelectedTimeLabel = (time) => {
+    if (time === "current") return "Current Time";
+    if (time === "15") return "+15 Minutes";
+    if (time === "30") return "+30 Minutes";
+    if (time === "45") return "+45 Minutes";
+    return "Unknown";
+  };
+
+  // =========================================================
+  // MEMBER 1 SEVERITY COLOUR
+  // =========================================================
+  const getSeverityColor = (severity) => {
+    const value = String(severity || "low").toLowerCase().trim();
+
+    if (value === "medium") return "#FFC107";
+    if (value === "high") return "#FF9800";
+    if (value === "severe") return "#F44336";
+
+    return "#4CAF50";
+  };
+
+  // =========================================================
+  // CREATE NODE POPUP
+  // =========================================================
+  const createNodePopupHtml = (node, nodeId, prediction, time) => {
+    const selectedDepth = getSelectedDepth(prediction, time);
+    const selectedTimeLabel = getSelectedTimeLabel(time);
+    const severity = String(
+      prediction.severity || "Low"
+    ).trim();
+
+    return `
+      <div style="min-width: 230px;">
+        <h3 style="margin-bottom: 8px;">
+          ${node.location_name || "Flood Monitoring Node"}
+        </h3>
+
+        <p><b>Node ID:</b> ${nodeId}</p>
+
+        <p><b>Selected Prediction Time:</b>
+        ${selectedTimeLabel}</p>
+
+        <p style="font-size: 16px;">
+          <b>Selected Water Depth:</b>
+          ${selectedDepth} m
+        </p>
+
+        <hr />
+
+        <h4>Member 1 Flood Prediction</h4>
+
+        <p><b>Current Depth:</b>
+        ${prediction.current_depth || "N/A"} m</p>
+
+        <p><b>+15 min Depth:</b>
+        ${prediction.depth_15min || "N/A"} m</p>
+
+        <p><b>+30 min Depth:</b>
+        ${prediction.depth_30min || "N/A"} m</p>
+
+        <p><b>+45 min Depth:</b>
+        ${prediction.depth_45min || "N/A"} m</p>
+
+        <hr />
+
+        <p><b>Severity:</b> ${severity}</p>
+      </div>
+    `;
+  };
+
+  // =========================================================
+  // LOAD MAP ONLY ONCE
+  // =========================================================
   useEffect(() => {
+    if (mapRef.current) return;
+
     const map = new maplibregl.Map({
       container: mapContainer.current,
       style: "https://demotiles.maplibre.org/style.json",
@@ -15,23 +119,22 @@ function App() {
       zoom: 13,
     });
 
+    mapRef.current = map;
+
     map.on("load", async () => {
       try {
-        // =========================
+        // =====================================================
         // 1. LOAD STUDY AREA
-        // =========================
+        // =====================================================
         const studyResponse = await fetch(
           "/data/study_area.geojson"
         );
 
         if (!studyResponse.ok) {
-          throw new Error(
-            "Cannot load study_area.geojson"
-          );
+          throw new Error("Cannot load study_area.geojson");
         }
 
-        const studyArea =
-          await studyResponse.json();
+        const studyArea = await studyResponse.json();
 
         map.addSource("study-area", {
           type: "geojson",
@@ -56,21 +159,18 @@ function App() {
           },
         });
 
-        // =========================
+        // =====================================================
         // 2. LOAD ROADS
-        // =========================
+        // =====================================================
         const roadsResponse = await fetch(
           "/data/roads.geojson"
         );
 
         if (!roadsResponse.ok) {
-          throw new Error(
-            "Cannot load roads.geojson"
-          );
+          throw new Error("Cannot load roads.geojson");
         }
 
-        const roads =
-          await roadsResponse.json();
+        const roads = await roadsResponse.json();
 
         map.addSource("roads", {
           type: "geojson",
@@ -86,9 +186,49 @@ function App() {
           },
         });
 
-        // =========================
-        // 3. LOAD NODES
-        // =========================
+        // =====================================================
+        // 3. LOAD MEMBER 1 FLOOD PREDICTION DATA
+        // =====================================================
+        const predictionResponse = await fetch(
+          "/data/member1_flood_predictions.csv"
+        );
+
+        if (!predictionResponse.ok) {
+          throw new Error(
+            "Cannot load member1_flood_predictions.csv"
+          );
+        }
+
+        const predictionCsvText =
+          await predictionResponse.text();
+
+        const predictionResult = Papa.parse(
+          predictionCsvText,
+          {
+            header: true,
+            skipEmptyLines: true,
+            delimiter: ",",
+            transformHeader: (header) =>
+              header.trim().replace(/^\uFEFF/, ""),
+          }
+        );
+
+        // Store Member 1 data using node_id
+        const predictionData = {};
+
+        predictionResult.data.forEach((row) => {
+          const nodeId = String(
+            row.node_id || ""
+          ).trim();
+
+          if (nodeId) {
+            predictionData[nodeId] = row;
+          }
+        });
+
+        // =====================================================
+        // 4. LOAD NODES
+        // =====================================================
         const nodesResponse = await fetch(
           "/data/01_velachery_nodes.csv"
         );
@@ -134,138 +274,81 @@ function App() {
             !isNaN(latitude) &&
             !isNaN(longitude)
           ) {
-            // Store coordinates
+            // Store coordinates for drainage pipes
             nodeCoordinates[nodeId] = [
               longitude,
               latitude,
             ];
 
-            // Add node marker
-            new maplibregl.Marker()
-              .setLngLat([
-                longitude,
-                latitude,
-              ])
-              .setPopup(
-                new maplibregl.Popup().setHTML(`
-                  <h3>
-                    ${
-                      node.location_name ||
-                      "Unknown Location"
-                    }
-                  </h3>
-                  <p>
-                    <b>Node ID:</b> ${nodeId}
-                  </p>
-                  <p>
-                    <b>Type:</b>
-                    ${node.node_type || "N/A"}
-                  </p>
-                  <p>
-                    <b>Latitude:</b>
-                    ${latitude}
-                  </p>
-                  <p>
-                    <b>Longitude:</b>
-                    ${longitude}
-                  </p>
-                `)
-              )
-              .addTo(map);
+            const prediction =
+              predictionData[nodeId] || {};
+
+            const severity = String(
+              prediction.severity || "Low"
+            ).trim();
+
+            const nodeColor =
+              getSeverityColor(severity);
+
+            // Create marker
+            const markerElement =
+              document.createElement("div");
+
+            markerElement.style.width = "24px";
+            markerElement.style.height = "24px";
+            markerElement.style.borderRadius = "50%";
+            markerElement.style.backgroundColor =
+              nodeColor;
+            markerElement.style.border =
+              "3px solid white";
+            markerElement.style.boxShadow =
+              "0 2px 6px rgba(0,0,0,0.4)";
+            markerElement.style.cursor =
+              "pointer";
+
+            const popup =
+              new maplibregl.Popup({
+                offset: 25,
+              }).setHTML(
+                createNodePopupHtml(
+                  node,
+                  nodeId,
+                  prediction,
+                  "current"
+                )
+              );
+
+            const marker =
+              new maplibregl.Marker({
+                element: markerElement,
+              })
+                .setLngLat([
+                  longitude,
+                  latitude,
+                ])
+                .setPopup(popup)
+                .addTo(map);
+
+            // Store marker for Day 4 updates
+            nodeMarkersRef.current.push({
+              marker,
+              markerElement,
+              popup,
+              node,
+              nodeId,
+              prediction,
+            });
 
             nodeCount++;
           }
         });
 
-        // =========================
-        // 4. LOAD MEMBER 2 DATA
-        // =========================
-        const visualizationResponse =
-          await fetch(
-            "/data/member3_drainage_visualization.csv"
-          );
-
-        if (!visualizationResponse.ok) {
-          throw new Error(
-            "Cannot load member3_drainage_visualization.csv"
-          );
-        }
-
-        const visualizationCsvText =
-          await visualizationResponse.text();
-
-        const visualizationResult =
-          Papa.parse(
-            visualizationCsvText,
-            {
-              header: true,
-              skipEmptyLines: true,
-              delimiter: ",",
-              transformHeader: (header) =>
-                header
-                  .trim()
-                  .replace(/^\uFEFF/, ""),
-            }
-          );
-
-        // Store Member 2 data using drainage_id
-        const visualizationData = {};
-
-        visualizationResult.data.forEach(
-          (item) => {
-            const drainageId = String(
-              item.drainage_id || ""
-            ).trim();
-
-            // Convert Severe_Blockage
-            // to Severe Blockage
-            const rawStatus = String(
-              item.blockage_status || "Normal"
-            )
-              .trim()
-              .replace(/_/g, " ");
-
-            const normalizedStatus =
-              rawStatus.toLowerCase() ===
-              "severe blockage"
-                ? "Severe Blockage"
-                : "Normal";
-
-            if (drainageId) {
-              visualizationData[drainageId] = {
-                flow_rate_lps:
-                  item.flow_rate_lps || "N/A",
-
-                capacity_lps:
-                  item.capacity_lps || "N/A",
-
-                water_level_cm:
-                  item.water_level_cm || "N/A",
-
-                blockage_probability:
-                  item.blockage_probability || "0",
-
-                blockage_status:
-                  normalizedStatus,
-
-                overflow_risk:
-                  item.overflow_risk || "Low",
-
-                backflow_risk:
-                  item.backflow_risk || "False",
-              };
-            }
-          }
+        // =====================================================
+        // 5. LOAD MEMBER 2 DRAINAGE DATA
+        // =====================================================
+        const drainageResponse = await fetch(
+          "/data/03_drainage_network.csv"
         );
-
-        // =========================
-        // 5. LOAD ORIGINAL
-        // DRAINAGE NETWORK
-        // =========================
-        const drainageResponse =
-          await fetch(
-            "/data/03_drainage_network.csv"
-          );
 
         if (!drainageResponse.ok) {
           throw new Error(
@@ -276,277 +359,328 @@ function App() {
         const drainageCsvText =
           await drainageResponse.text();
 
-        const drainageResult =
-          Papa.parse(
-            drainageCsvText,
-            {
-              header: true,
-              skipEmptyLines: true,
-              delimiter: ",",
-              transformHeader: (header) =>
-                header
-                  .trim()
-                  .replace(/^\uFEFF/, ""),
-            }
-          );
-
-        const drainageFeatures = [];
-        let pipeCount = 0;
-        let severeCount = 0;
-
-        drainageResult.data.forEach(
-          (pipe) => {
-            const pipeId = String(
-              pipe.pipe_id || ""
-            ).trim();
-
-            const sourceNode = String(
-              pipe.source_node || ""
-            ).trim();
-
-            const targetNode = String(
-              pipe.target_node || ""
-            ).trim();
-
-            // Match Member 2 data
-            const visualData =
-              visualizationData[pipeId] || {};
-
-            if (
-              pipeId &&
-              nodeCoordinates[sourceNode] &&
-              nodeCoordinates[targetNode]
-            ) {
-              const blockageStatus =
-                visualData.blockage_status ||
-                "Normal";
-
-              if (
-                blockageStatus ===
-                "Severe Blockage"
-              ) {
-                severeCount++;
-              }
-
-              drainageFeatures.push({
-                type: "Feature",
-
-                properties: {
-                  pipe_id: pipeId,
-                  source_node: sourceNode,
-                  target_node: targetNode,
-
-                  flow_rate_lps:
-                    visualData.flow_rate_lps ||
-                    "N/A",
-
-                  capacity_lps:
-                    visualData.capacity_lps ||
-                    "N/A",
-
-                  water_level_cm:
-                    visualData.water_level_cm ||
-                    "N/A",
-
-                  blockage_probability:
-                    visualData.blockage_probability ||
-                    "0",
-
-                  blockage_status:
-                    blockageStatus,
-
-                  overflow_risk:
-                    visualData.overflow_risk ||
-                    "Low",
-
-                  backflow_risk:
-                    visualData.backflow_risk ||
-                    "False",
-                },
-
-                geometry: {
-                  type: "LineString",
-                  coordinates: [
-                    nodeCoordinates[sourceNode],
-                    nodeCoordinates[targetNode],
-                  ],
-                },
-              });
-
-              pipeCount++;
-            }
+        const drainageResult = Papa.parse(
+          drainageCsvText,
+          {
+            header: true,
+            skipEmptyLines: true,
+            delimiter: ",",
+            transformHeader: (header) =>
+              header.trim().replace(/^\uFEFF/, ""),
           }
         );
 
-        // =========================
-        // 6. ADD DRAINAGE SOURCE
-        // =========================
+        const drainageFeatures = [];
+        let pipeCount = 0;
+        let severeBlockageCount = 0;
+
+        drainageResult.data.forEach((pipe) => {
+          const pipeId = String(
+            pipe.drainage_id ||
+              pipe.pipe_id ||
+              ""
+          ).trim();
+
+          const sourceNode = String(
+            pipe.from_node ||
+              pipe.source_node ||
+              ""
+          ).trim();
+
+          const targetNode = String(
+            pipe.to_node ||
+              pipe.target_node ||
+              ""
+          ).trim();
+
+          if (
+            pipeId &&
+            nodeCoordinates[sourceNode] &&
+            nodeCoordinates[targetNode]
+          ) {
+            const blockageStatus = String(
+              pipe.blockage_status ||
+                pipe.blockage_st ||
+                "Normal"
+            ).trim();
+
+            const isSevere =
+              blockageStatus
+                .toLowerCase()
+                .includes("severe");
+
+            if (isSevere) {
+              severeBlockageCount++;
+            }
+
+            drainageFeatures.push({
+              type: "Feature",
+
+              properties: {
+                pipe_id: pipeId,
+                source_node: sourceNode,
+                target_node: targetNode,
+                flow_rate:
+                  pipe.flow_rate || "N/A",
+                capacity:
+                  pipe.capacity ||
+                  pipe.pipe_capacity ||
+                  "N/A",
+                water_level:
+                  pipe.water_level || "N/A",
+                blockage_probability:
+                  pipe.blockage_probability ||
+                  pipe.blockage_p ||
+                  "N/A",
+                blockage_status:
+                  blockageStatus,
+                overflow_risk:
+                  pipe.overflow_risk ||
+                  "N/A",
+                backflow_risk:
+                  pipe.backflow_risk ||
+                  "N/A",
+                severe: isSevere,
+              },
+
+              geometry: {
+                type: "LineString",
+                coordinates: [
+                  nodeCoordinates[sourceNode],
+                  nodeCoordinates[targetNode],
+                ],
+              },
+            });
+
+            pipeCount++;
+          }
+        });
+
+        // =====================================================
+        // 6. ADD DRAINAGE NETWORK
+        // =====================================================
         map.addSource("drainage-network", {
           type: "geojson",
+
           data: {
             type: "FeatureCollection",
             features: drainageFeatures,
           },
         });
 
-        // =========================
-        // 7. ADD COLORED PIPES
-        // =========================
+        // Normal pipes
         map.addLayer({
-          id: "drainage-pipes",
+          id: "normal-drainage-pipes",
           type: "line",
           source: "drainage-network",
 
+          filter: [
+            "!=",
+            ["get", "severe"],
+            true,
+          ],
+
           paint: {
-            "line-width": [
-              "match",
-              ["get", "blockage_status"],
-              "Severe Blockage",
-              7,
-              4,
-            ],
-
-            "line-opacity": 0.9,
-
-            "line-color": [
-              "match",
-              ["get", "blockage_status"],
-              "Severe Blockage",
-              "#ff0000",
-              "#008000",
-            ],
+            "line-color": "#138A36",
+            "line-width": 4,
+            "line-opacity": 0.8,
           },
         });
 
-        // =========================
-        // 8. CLICK PIPE
-        // SHOW MEMBER 2 DETAILS
-        // =========================
+        // Severe blockage pipes
+        map.addLayer({
+          id: "severe-drainage-pipes",
+          type: "line",
+          source: "drainage-network",
+
+          filter: [
+            "==",
+            ["get", "severe"],
+            true,
+          ],
+
+          paint: {
+            "line-color": "#FF0000",
+            "line-width": 6,
+            "line-opacity": 0.9,
+          },
+        });
+
+        // =====================================================
+        // 7. PIPE POPUP
+        // =====================================================
+        const showPipePopup = (e) => {
+          if (!e.features || !e.features.length) {
+            return;
+          }
+
+          const pipe = e.features[0];
+
+          new maplibregl.Popup()
+            .setLngLat(e.lngLat)
+            .setHTML(`
+              <h3>Drainage Pipe</h3>
+
+              <p><b>Pipe ID:</b>
+              ${pipe.properties.pipe_id}</p>
+
+              <p><b>From:</b>
+              ${pipe.properties.source_node}</p>
+
+              <p><b>To:</b>
+              ${pipe.properties.target_node}</p>
+
+              <p><b>Flow Rate:</b>
+              ${pipe.properties.flow_rate} LPS</p>
+
+              <p><b>Capacity:</b>
+              ${pipe.properties.capacity} LPS</p>
+
+              <p><b>Water Level:</b>
+              ${pipe.properties.water_level}</p>
+
+              <p><b>Blockage Probability:</b>
+              ${pipe.properties.blockage_probability}</p>
+
+              <p><b>Blockage Status:</b>
+              ${pipe.properties.blockage_status}</p>
+
+              <p><b>Overflow Risk:</b>
+              ${pipe.properties.overflow_risk}</p>
+
+              <p><b>Backflow Risk:</b>
+              ${pipe.properties.backflow_risk}</p>
+            `)
+            .addTo(map);
+        };
+
         map.on(
           "click",
-          "drainage-pipes",
-          (event) => {
-            const feature =
-              event.features?.[0];
-
-            if (!feature) return;
-
-            const properties =
-              feature.properties;
-
-            new maplibregl.Popup()
-              .setLngLat(event.lngLat)
-              .setHTML(`
-                <h3>
-                  Drainage Pipe:
-                  ${properties.pipe_id}
-                </h3>
-
-                <p>
-                  <b>From:</b>
-                  ${properties.source_node}
-                </p>
-
-                <p>
-                  <b>To:</b>
-                  ${properties.target_node}
-                </p>
-
-                <p>
-                  <b>Flow Rate:</b>
-                  ${properties.flow_rate_lps} LPS
-                </p>
-
-                <p>
-                  <b>Capacity:</b>
-                  ${properties.capacity_lps} LPS
-                </p>
-
-                <p>
-                  <b>Water Level:</b>
-                  ${properties.water_level_cm} cm
-                </p>
-
-                <p>
-                  <b>Blockage Probability:</b>
-                  ${properties.blockage_probability}
-                </p>
-
-                <p>
-                  <b>Blockage Status:</b>
-                  ${properties.blockage_status}
-                </p>
-
-                <p>
-                  <b>Overflow Risk:</b>
-                  ${properties.overflow_risk}
-                </p>
-
-                <p>
-                  <b>Backflow Risk:</b>
-                  ${properties.backflow_risk}
-                </p>
-              `)
-              .addTo(map);
-          }
-        );
-
-        // =========================
-        // 9. CHANGE CURSOR
-        // =========================
-        map.on(
-          "mouseenter",
-          "drainage-pipes",
-          () => {
-            map.getCanvas().style.cursor =
-              "pointer";
-          }
+          "normal-drainage-pipes",
+          showPipePopup
         );
 
         map.on(
-          "mouseleave",
-          "drainage-pipes",
-          () => {
-            map.getCanvas().style.cursor =
-              "";
-          }
+          "click",
+          "severe-drainage-pipes",
+          showPipePopup
         );
 
-        // =========================
-        // 10. SUCCESS MESSAGE
-        // =========================
+        // =====================================================
+        // 8. SUCCESS MESSAGE
+        // =====================================================
         setMessage(
-          `SUCCESS: ${nodeCount} nodes | ${pipeCount} drainage pipes | ${severeCount} severe blockage pipes`
+          `SUCCESS: ${nodeCount} nodes | ${pipeCount} drainage pipes | ${severeBlockageCount} severe blockage pipes`
         );
       } catch (error) {
         console.error(error);
+
         setMessage(
           `ERROR: ${error.message}`
         );
       }
     });
 
-    return () => map.remove();
+    return () => {
+      nodeMarkersRef.current = [];
+
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
+    };
   }, []);
+
+  // =========================================================
+  // DAY 4: UPDATE NODE POPUPS WHEN TIME BUTTON CHANGES
+  // =========================================================
+  useEffect(() => {
+    nodeMarkersRef.current.forEach(
+      ({
+        markerElement,
+        popup,
+        node,
+        nodeId,
+        prediction,
+      }) => {
+        const selectedDepth =
+          getSelectedDepth(
+            prediction,
+            selectedTime
+          );
+
+        // Update popup with selected prediction time
+        popup.setHTML(
+          createNodePopupHtml(
+            node,
+            nodeId,
+            prediction,
+            selectedTime
+          )
+        );
+
+        // Show selected prediction as tooltip
+        markerElement.title =
+          `${nodeId} | ${getSelectedTimeLabel(
+            selectedTime
+          )} | Depth: ${selectedDepth} m`;
+      }
+    );
+  }, [selectedTime]);
+
+  // =========================================================
+  // BUTTON STYLE
+  // =========================================================
+  const getButtonStyle = (time) => ({
+    padding: "8px 10px",
+    margin: "3px",
+    borderRadius: "5px",
+    border: "1px solid #555",
+    cursor: "pointer",
+    fontWeight: "bold",
+    background:
+      selectedTime === time
+        ? "#1976D2"
+        : "#F1F1F1",
+    color:
+      selectedTime === time
+        ? "white"
+        : "black",
+  });
 
   return (
     <div>
-      {/* INFORMATION PANEL */}
+      {/* =====================================================
+          INFORMATION PANEL
+      ===================================================== */}
       <div
         style={{
           position: "absolute",
           top: "20px",
           left: "20px",
-          zIndex: 1,
+          zIndex: 2,
           background: "white",
           padding: "15px",
           borderRadius: "8px",
           fontWeight: "bold",
+          minWidth: "330px",
         }}
       >
-        <div>HydroGraph-Twin</div>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "20px",
+          }}
+        >
+          HydroGraph-Twin
+        </div>
 
-        <div>
+        <div
+          style={{
+            textAlign: "center",
+            marginTop: "5px",
+          }}
+        >
           Velachery Flood Monitoring
         </div>
 
@@ -556,11 +690,103 @@ function App() {
 
         <br />
 
+        <div>🟢 Low Flood Severity</div>
+        <div>🟡 Medium Flood Severity</div>
+        <div>🟠 High Flood Severity</div>
+        <div>🔴 Severe Flood</div>
+
+        <br />
+
         <div>🟢 Normal Pipe</div>
         <div>🔴 Severe Blockage</div>
       </div>
 
-      {/* MAP */}
+      {/* =====================================================
+          DAY 4 PREDICTION TIME CONTROL
+      ===================================================== */}
+      <div
+        style={{
+          position: "absolute",
+          top: "400px",
+          left: "20px",
+          zIndex: 2,
+          background: "white",
+          padding: "15px",
+          borderRadius: "8px",
+          minWidth: "330px",
+        }}
+      >
+        <div
+          style={{
+            fontWeight: "bold",
+            marginBottom: "10px",
+          }}
+        >
+          Day 4: Flood Prediction Time
+        </div>
+
+        <button
+          style={getButtonStyle("current")}
+          onClick={() =>
+            setSelectedTime("current")
+          }
+        >
+          Current
+        </button>
+
+        <button
+          style={getButtonStyle("15")}
+          onClick={() =>
+            setSelectedTime("15")
+          }
+        >
+          +15 min
+        </button>
+
+        <button
+          style={getButtonStyle("30")}
+          onClick={() =>
+            setSelectedTime("30")
+          }
+        >
+          +30 min
+        </button>
+
+        <button
+          style={getButtonStyle("45")}
+          onClick={() =>
+            setSelectedTime("45")
+          }
+        >
+          +45 min
+        </button>
+
+        <div
+          style={{
+            marginTop: "10px",
+            fontWeight: "bold",
+          }}
+        >
+          Selected:{" "}
+          {getSelectedTimeLabel(
+            selectedTime
+          )}
+        </div>
+
+        <div
+          style={{
+            marginTop: "5px",
+            fontSize: "13px",
+          }}
+        >
+          Click any node to view the selected
+          prediction depth.
+        </div>
+      </div>
+
+      {/* =====================================================
+          MAP
+      ===================================================== */}
       <div
         ref={mapContainer}
         style={{
