@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "road_id": "ROAD_001",
+        "name": "Velachery Main Road",
+        "type": "primary"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2110, 12.9820],
+          [80.2160, 12.9815],
+          [80.2210, 12.9805],
+          [80.2260, 12.9795],
+          [80.2310, 12.9785]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_id": "ROAD_002",
+        "name": "Road Connection 1",
+        "type": "secondary"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2160, 12.9880],
+          [80.2170, 12.9840],
+          [80.2180, 12.9800],
+          [80.2190, 12.9760],
+          [80.2200, 12.9700]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "road_id": "ROAD_003",
+        "name": "Road Connection 2",
+        "type": "secondary"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [80.2250, 12.9880],
+          [80.2240, 12.9840],
+          [80.2230, 12.9800],
+          [80.2220, 12.9760],
+          [80.2210, 12.9700]
+        ]
+      }
+    }
+  ]
+}
