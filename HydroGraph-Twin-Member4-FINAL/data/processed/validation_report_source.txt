@@ -1,0 +1,109 @@
+HydroGraph-Twin — Member 4 Data Validation Report
+Generated: 2026-08-29
+==================================================
+
+SOURCE FILES VALIDATED (as shared by teammates):
+  01_velachery_nodes.csv              - 20 nodes
+  02_velachery_weather_timeseries.csv - 14,448 hourly records (2025-01-01 to 2026-08-25)
+  03_drainage_network.csv             - 19 pipe segments (chain N001->N020)
+  04_terrain_features.csv             - 20 nodes
+  05_hydraulic_observations.csv       - 10,000 records (20 nodes x 500 hourly timestamps, 2025-01-01 to 2025-01-21)
+  06_flood_blockage_labels.csv        - 10,000 records (matches 05 exactly on timestamp+node_id)
+
+--------------------------------------------------
+1. NODE ID CONSISTENCY CHECK — PASS
+--------------------------------------------------
+All node IDs (N001-N020) are identical and consistently formatted across every file.
+No mismatches such as "N3" / "N03" / "Node_003" were found.
+  - drainage source/target nodes not in 01: none
+  - terrain node_ids not in 01: none
+  - hydraulic node_ids not in 01: none
+  - blockage node_ids not in 01: none
+  - nodes in 01 missing from terrain/hydraulic/drainage: none
+
+--------------------------------------------------
+2. COORDINATE VALIDATION — PASS
+--------------------------------------------------
+All 20 node coordinates fall inside the real Velachery, Chennai bounding box:
+  latitude  12.965129 - 12.989388
+  longitude 80.192115 - 80.225360
+These correspond to genuine, named Velachery locations (Velachery Lake, Velachery
+Main Road, Tansi Nagar, Dhandeeswaram, Vijaya Nagar, Ram Nagar, Sadasiva Nagar, etc.)
+— i.e. REAL geographic data, not placeholder/lattice coordinates.
+
+--------------------------------------------------
+3. MISSING VALUES — PASS
+--------------------------------------------------
+No missing values were found in any of the 6 files.
+
+--------------------------------------------------
+4. DUPLICATE RECORDS — PASS
+--------------------------------------------------
+  - nodes:   0 duplicate node_id
+  - terrain: 0 duplicate node_id
+  - hydraulic (timestamp, node_id): 0 duplicates
+  - blockage  (timestamp, node_id): 0 duplicates
+  - weather timestamp: 0 duplicates
+
+--------------------------------------------------
+5. MEMBER 4's OWN 4 ZIP DELIVERABLES vs THE 6 REAL CSVs — MISMATCH FOUND
+--------------------------------------------------
+Comparing Member4-Day1-Outputs.zip / files.zip / files__1_.zip / files__2_.zip
+against the 6 CSVs above:
+
+  - Node set: the zips use 56 auto-generated nodes on a fixed lattice
+    (e.g. lat 12.955, lon 80.205 / 80.210 / 80.215 ... stepping by 0.005 deg),
+    NOT the 20 real, named Velachery nodes in 01_velachery_nodes.csv.
+  - Node IDs overlap only up to N001-N020 by name, but coordinates and
+    location names for those IDs are completely different between the
+    two sets (e.g. N001 = "Velachery Sector 1-1" @ 12.955,80.205 in the
+    zip vs "Velachery Vijaya Nagar" @ 12.978625,80.22158 in the real CSV).
+  - 02_rainfall_timeseries.csv in the zip (897 rows, synthetic storm
+    profile, Aug 2026) does not match 02_velachery_weather_timeseries.csv
+    (14,448 rows of real hourly Open-Meteo-style data, Jan 2025-Aug 2026).
+  - 03_drainage_network.csv in the zip (98 pipes) does not match
+    03_drainage_network1.csv (19 pipes).
+  - 04_terrain_features.csv in the zip (56 rows) does not match the real
+    04_terrain_features.csv (20 rows) despite having the identical filename.
+  - 05/06 in the zip (897 rows) do not match the real 05/06 (10,000 rows).
+
+  CONCLUSION: The 4 zip files were built from an earlier, self-generated
+  prototype dataset and were never reconciled with the 6 CSVs the
+  teammates are actually using. They should NOT be shared to Members
+  1/2/3 as-is — doing so would silently break every node_id join in
+  their pipelines.
+
+--------------------------------------------------
+6. ACTION TAKEN
+--------------------------------------------------
+All geographic/derived deliverables were rebuilt directly from the 6
+real, validated CSVs so IDs, coordinates, and record counts now match
+exactly:
+  - drainage_nodes.geojson     (20 real nodes)
+  - drainage_lines.geojson     (19 real pipe segments)
+  - velachery_boundary.geojson (convex hull of the 20 real nodes, +300m buffer)
+  - integrated_dataset.csv     (10,000 rows: nodes + terrain + hydraulics +
+                                 blockage labels + pipe capacity, fully merged,
+                                 0 nulls, 0 duplicates)
+  - latest_rainfall.json       (from the real Open-Meteo-style weather file,
+                                 latest observed reading applied per node)
+  - rainfall_forecast.csv      (0-3h persistence/trend nowcast from the last
+                                 6 real hourly readings — clearly a prototype
+                                 nowcast method, not a physical NWP model)
+
+--------------------------------------------------
+7. STILL OUTSTANDING / NOT FABRICATED
+--------------------------------------------------
+  - roads.geojson / roads.csv: NOT regenerated with invented coordinates.
+    A ready-to-run Overpass Turbo query is provided (see ROADS_QUERY.md)
+    to pull the real OSM road network for this exact study-area boundary.
+  - Raw DEM rasters (.tif): the real 04_terrain_features.csv already
+    contains derived elevation/slope/flow values labelled
+    "derived_copernicus_dem" — no raw raster was supplied by the
+    teammate, so none is fabricated here. If needed, download the
+    Copernicus GLO-30 tile covering 12.96-12.99N, 80.19-80.23E.
+  - pipe_diameter/length/roughness in 03 and blockage labels in 06 are
+    explicitly marked "prototype_assumption" by the teammate who created
+    them — this is expected and consistent with the problem statement's
+    own guidance (real municipal drainage/blockage data is not publicly
+    available), not a data-quality issue.

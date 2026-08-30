@@ -1,0 +1,52 @@
+HydroGraph-Twin — Member 4 Final Delivery Validation
+Generated: 2026-08-29
+===========================================================
+
+COMPLETED / INCLUDED
+- 6 core datasets (nodes, rainfall/weather, drainage, terrain, hydraulic, blockage labels)
+- Rainfall auxiliary JSON + prototype nowcast CSV
+- Copernicus-derived DEM raster set: raw DEM, slope, D8 flow direction,
+  D8 flow accumulation, low-lying mask
+- Drainage nodes and drainage lines GeoJSON
+- OSM roads GeoJSON + CSV + node-road alignment
+- Velachery boundary GeoJSON
+- Integrated dataset
+- Reproducibility/helper scripts for rainfall, DEM, geographic processing, validation
+- Root README and documentation
+
+CLEANUP PERFORMED
+- Removed one trailing blank row from 01_velachery_nodes.csv; 20 valid nodes remain.
+- The team's weather file was exposed as the requested
+  data/02_rainfall_timeseries.csv without deleting the original
+  data/02_velachery_weather_timeseries.csv.
+
+CORE DATA CHECKS
+- Valid node IDs: 20 (N001-N020)
+- Drainage segments: 19
+- Hydraulic observations: 10,000
+- Blockage labels: 10,000
+- Hydraulic/blockage timestamp+node keys: identical
+- Rainfall/weather records: 14,448 hourly records
+- Integrated dataset: 10,000 rows
+
+IMPORTANT DEM/TERRAIN NOTE
+The supplied 04_terrain_features.csv and the Copernicus-derived TIFF package are
+NOT cell-for-cell numerically identical at the node coordinates. The TIFFs are
+a genuine derived raster set from the uploaded Copernicus DEM; the CSV contains
+the team's existing terrain values. They should not be silently substituted for
+one another. terrain_features_from_copernicus.csv records values sampled from
+the TIFFs.
+
+Node-level raster comparison:
+raw_dem.tif: sampled 20/20 nodes; exact matches=0/20
+slope.tif: sampled 20/20 nodes; exact matches=0/20
+flowdirection.tif: sampled 20/20 nodes; exact matches=0/20
+flowaccumulation.tif: sampled 20/20 nodes; exact matches=0/20
+low_lying_areas.tif: sampled 20/20 nodes; exact matches=14/20
+
+DELIVERY DECISION
+The package is structurally complete for Member 4 delivery. The only technical
+caveat is the DEM/terrain numeric mismatch described above. If Members 1-3 are
+already consuming the existing 04_terrain_features.csv, keep that CSV as the
+authoritative tabular terrain source. If they need raster-derived terrain,
+use data/dem/* and data/dem/terrain_features_from_copernicus.csv together.

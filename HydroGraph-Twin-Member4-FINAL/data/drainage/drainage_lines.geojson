@@ -1,0 +1,519 @@
+{
+  "type": "FeatureCollection",
+  "name": "drainage_lines",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22158,
+            12.978625
+          ],
+          [
+            80.22345,
+            12.97746
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P001",
+        "source_node": "N001",
+        "target_node": "N002",
+        "pipe_length_m": 1027.4,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22345,
+            12.97746
+          ],
+          [
+            80.2195714,
+            12.9672994
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P002",
+        "source_node": "N002",
+        "target_node": "N003",
+        "pipe_length_m": 1649.24,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2195714,
+            12.9672994
+          ],
+          [
+            80.22197,
+            12.98298
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P003",
+        "source_node": "N003",
+        "target_node": "N004",
+        "pipe_length_m": 3772.15,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22197,
+            12.98298
+          ],
+          [
+            80.22285,
+            12.98017
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P004",
+        "source_node": "N004",
+        "target_node": "N005",
+        "pipe_length_m": 1764.2,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22285,
+            12.98017
+          ],
+          [
+            80.2195714,
+            12.9672994
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P005",
+        "source_node": "N005",
+        "target_node": "N006",
+        "pipe_length_m": 3754.0,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2195714,
+            12.9672994
+          ],
+          [
+            80.2071039,
+            12.9652732
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P006",
+        "source_node": "N006",
+        "target_node": "N007",
+        "pipe_length_m": 3814.17,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2071039,
+            12.9652732
+          ],
+          [
+            80.22536,
+            12.97855
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P007",
+        "source_node": "N007",
+        "target_node": "N008",
+        "pipe_length_m": 884.85,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22536,
+            12.97855
+          ],
+          [
+            80.2210664,
+            12.975951
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P008",
+        "source_node": "N008",
+        "target_node": "N009",
+        "pipe_length_m": 2803.81,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2210664,
+            12.975951
+          ],
+          [
+            80.22107,
+            12.97595
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P009",
+        "source_node": "N009",
+        "target_node": "N010",
+        "pipe_length_m": 3114.54,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22107,
+            12.97595
+          ],
+          [
+            80.22075,
+            12.98579
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P010",
+        "source_node": "N010",
+        "target_node": "N011",
+        "pipe_length_m": 2298.65,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22075,
+            12.98579
+          ],
+          [
+            80.2118131,
+            12.9653558
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P011",
+        "source_node": "N011",
+        "target_node": "N012",
+        "pipe_length_m": 734.21,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2118131,
+            12.9653558
+          ],
+          [
+            80.2028543,
+            12.9651292
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P012",
+        "source_node": "N012",
+        "target_node": "N013",
+        "pipe_length_m": 971.1,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2028543,
+            12.9651292
+          ],
+          [
+            80.2066688,
+            12.9810098
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P013",
+        "source_node": "N013",
+        "target_node": "N014",
+        "pipe_length_m": 1813.57,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2066688,
+            12.9810098
+          ],
+          [
+            80.2049757,
+            12.9852789
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P014",
+        "source_node": "N014",
+        "target_node": "N015",
+        "pipe_length_m": 508.92,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2049757,
+            12.9852789
+          ],
+          [
+            80.1921145,
+            12.9835214
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P015",
+        "source_node": "N015",
+        "target_node": "N016",
+        "pipe_length_m": 1407.17,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.1921145,
+            12.9835214
+          ],
+          [
+            80.2017099,
+            12.9893877
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P016",
+        "source_node": "N016",
+        "target_node": "N017",
+        "pipe_length_m": 1227.36,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.2017099,
+            12.9893877
+          ],
+          [
+            80.21957,
+            12.9673
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P017",
+        "source_node": "N017",
+        "target_node": "N018",
+        "pipe_length_m": 1157.4,
+        "pipe_diameter_m": 0.8,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 836.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.21957,
+            12.9673
+          ],
+          [
+            80.22201,
+            12.98287
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P018",
+        "source_node": "N018",
+        "target_node": "N019",
+        "pipe_length_m": 314.77,
+        "pipe_diameter_m": 1.0,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 1516.36,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            80.22201,
+            12.98287
+          ],
+          [
+            80.2210664,
+            12.975951
+          ]
+        ]
+      },
+      "properties": {
+        "pipe_id": "P019",
+        "source_node": "N019",
+        "target_node": "N020",
+        "pipe_length_m": 850.0,
+        "pipe_diameter_m": 0.6,
+        "pipe_slope": 0.004,
+        "roughness_coefficient": 0.013,
+        "pipe_capacity_lps": 388.33,
+        "data_source": "prototype_assumption_manning_calculated"
+      }
+    }
+  ]
+}
