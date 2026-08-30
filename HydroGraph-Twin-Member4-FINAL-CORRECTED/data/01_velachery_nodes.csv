@@ -1,0 +1,22 @@
+node_id,location_name,latitude,longitude,node_type
+N001,Velachery Vijaya Nagar,12.978625,80.22158,transport_node
+N002,Tansi Nagar,12.97746,80.22345,neighbourhood_node
+N003,Velachery,12.9672994,80.2195714,drainage_node
+N004,Dhandeeswaram,12.98298,80.22197,transport_node
+N005,Velachery Main Road,12.98017,80.22285,road_node
+N006,Velachery Railway Station,12.9672994,80.2195714,transport_node
+N007,Ram Nagar,12.9652732,80.2071039,drainage_node
+N008,Tansi Nagar Bus Stop,12.97855,80.22536,transport_node
+N009,Velachery Vijayanagar Bus Terminus,12.9759510,80.2210664,intersection
+N010,Vijaynagar Area,12.97595,80.22107,landmark_node
+N011,Velachery Lake,12.98579,80.22075,water body
+N012,Ram Nagar,12.9653558,80.2118131,drainage_node
+N013,Sadasiva Nagar,12.9651292,80.2028543,junction
+N014,Andal Nagar,12.9810098,80.2066688,drainage_node
+N015,Subramanya Temple,12.9852789,80.2049757,landmark_node
+N016,Guruvayurappan temple,12.9835214,80.1921145,landmark_node
+N017,Vinayaka Temple,12.9893877,80.2017099,landmark_node
+N018,Velachery Railway Station Area,12.96730,80.21957,transport_node
+N019,Dhandeeswaram Extension,12.98287,80.22201,drainage_node
+N020,Vijayanagar Velachery,12.9759510,80.2210664,intersection
+,,,,

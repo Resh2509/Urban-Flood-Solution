@@ -1,0 +1,227 @@
+{
+  "observation_timestamp": "2026-08-25T23:00:00",
+  "data_source": "open_meteo_weather_timeseries (02_velachery_weather_timeseries.csv)",
+  "note": "Single-station reading applied uniformly across all study-area nodes; a real deployment should use gridded/radar rainfall.",
+  "stations": [
+    {
+      "node_id": "N001",
+      "location_name": "Velachery Vijaya Nagar",
+      "latitude": 12.978625,
+      "longitude": 80.22158,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N002",
+      "location_name": "Tansi Nagar",
+      "latitude": 12.97746,
+      "longitude": 80.22345,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N003",
+      "location_name": "Velachery",
+      "latitude": 12.9672994,
+      "longitude": 80.2195714,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N004",
+      "location_name": "Dhandeeswaram",
+      "latitude": 12.98298,
+      "longitude": 80.22197,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N005",
+      "location_name": "Velachery Main Road",
+      "latitude": 12.98017,
+      "longitude": 80.22285,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N006",
+      "location_name": "Velachery Railway Station",
+      "latitude": 12.9672994,
+      "longitude": 80.2195714,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N007",
+      "location_name": "Ram Nagar",
+      "latitude": 12.9652732,
+      "longitude": 80.2071039,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N008",
+      "location_name": "Tansi Nagar Bus Stop",
+      "latitude": 12.97855,
+      "longitude": 80.22536,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N009",
+      "location_name": "Velachery Vijayanagar Bus Terminus",
+      "latitude": 12.975951,
+      "longitude": 80.2210664,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N010",
+      "location_name": "Vijaynagar Area",
+      "latitude": 12.97595,
+      "longitude": 80.22107,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N011",
+      "location_name": "Velachery Lake",
+      "latitude": 12.98579,
+      "longitude": 80.22075,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N012",
+      "location_name": "Ram Nagar",
+      "latitude": 12.9653558,
+      "longitude": 80.2118131,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N013",
+      "location_name": "Sadasiva Nagar",
+      "latitude": 12.9651292,
+      "longitude": 80.2028543,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N014",
+      "location_name": "Andal Nagar",
+      "latitude": 12.9810098,
+      "longitude": 80.2066688,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N015",
+      "location_name": "Subramanya Temple",
+      "latitude": 12.9852789,
+      "longitude": 80.2049757,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N016",
+      "location_name": "Guruvayurappan temple",
+      "latitude": 12.9835214,
+      "longitude": 80.1921145,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N017",
+      "location_name": "Vinayaka Temple",
+      "latitude": 12.9893877,
+      "longitude": 80.2017099,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N018",
+      "location_name": "Velachery Railway Station Area",
+      "latitude": 12.9673,
+      "longitude": 80.21957,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N019",
+      "location_name": "Dhandeeswaram Extension",
+      "latitude": 12.98287,
+      "longitude": 80.22201,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    },
+    {
+      "node_id": "N020",
+      "location_name": "Vijayanagar Velachery",
+      "latitude": 12.975951,
+      "longitude": 80.2210664,
+      "rainfall_mm_hr": 0.0,
+      "temperature_2m_c": 26.2,
+      "relative_humidity_pct": 93.0,
+      "wind_speed_10m_kmh": 10.4,
+      "cloud_cover_pct": 83.0
+    }
+  ]
+}

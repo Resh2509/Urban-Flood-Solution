@@ -1,0 +1,8 @@
+Nodes: 21 rows; IDs unique=True
+Terrain: 20 rows; IDs unique=True
+Node ID sets match: False
+Integrated rows: 10000; integrated terrain nulls=0
+Terrain source: uploaded Copernicus DEM-derived rasters/CSV
+Flow direction in 04_terrain_features.csv is retained as D8 code; integrated_dataset.csv uses equivalent conventional degrees.
+Raster CRS: EPSG:4326; raw_dem/slope/flowdirection/flowaccumulation/low_lying_areas included.
+Note: this package prioritizes consistency between terrain CSV and the supplied Copernicus-derived TIFFs; it does not claim the DEM is survey-grade.

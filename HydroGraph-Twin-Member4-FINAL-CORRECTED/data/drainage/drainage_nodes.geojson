@@ -1,0 +1,306 @@
+{
+  "type": "FeatureCollection",
+  "name": "drainage_nodes",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22158,
+          12.978625
+        ]
+      },
+      "properties": {
+        "node_id": "N001",
+        "location_name": "Velachery Vijaya Nagar",
+        "node_type": "transport_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22345,
+          12.97746
+        ]
+      },
+      "properties": {
+        "node_id": "N002",
+        "location_name": "Tansi Nagar",
+        "node_type": "neighbourhood_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2195714,
+          12.9672994
+        ]
+      },
+      "properties": {
+        "node_id": "N003",
+        "location_name": "Velachery",
+        "node_type": "drainage_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22197,
+          12.98298
+        ]
+      },
+      "properties": {
+        "node_id": "N004",
+        "location_name": "Dhandeeswaram",
+        "node_type": "transport_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22285,
+          12.98017
+        ]
+      },
+      "properties": {
+        "node_id": "N005",
+        "location_name": "Velachery Main Road",
+        "node_type": "road_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2195714,
+          12.9672994
+        ]
+      },
+      "properties": {
+        "node_id": "N006",
+        "location_name": "Velachery Railway Station",
+        "node_type": "transport_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2071039,
+          12.9652732
+        ]
+      },
+      "properties": {
+        "node_id": "N007",
+        "location_name": "Ram Nagar",
+        "node_type": "drainage_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22536,
+          12.97855
+        ]
+      },
+      "properties": {
+        "node_id": "N008",
+        "location_name": "Tansi Nagar Bus Stop",
+        "node_type": "transport_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2210664,
+          12.975951
+        ]
+      },
+      "properties": {
+        "node_id": "N009",
+        "location_name": "Velachery Vijayanagar Bus Terminus",
+        "node_type": "intersection"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22107,
+          12.97595
+        ]
+      },
+      "properties": {
+        "node_id": "N010",
+        "location_name": "Vijaynagar Area",
+        "node_type": "landmark_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22075,
+          12.98579
+        ]
+      },
+      "properties": {
+        "node_id": "N011",
+        "location_name": "Velachery Lake",
+        "node_type": "water body"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2118131,
+          12.9653558
+        ]
+      },
+      "properties": {
+        "node_id": "N012",
+        "location_name": "Ram Nagar",
+        "node_type": "drainage_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2028543,
+          12.9651292
+        ]
+      },
+      "properties": {
+        "node_id": "N013",
+        "location_name": "Sadasiva Nagar",
+        "node_type": "junction"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2066688,
+          12.9810098
+        ]
+      },
+      "properties": {
+        "node_id": "N014",
+        "location_name": "Andal Nagar",
+        "node_type": "drainage_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2049757,
+          12.9852789
+        ]
+      },
+      "properties": {
+        "node_id": "N015",
+        "location_name": "Subramanya Temple",
+        "node_type": "landmark_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.1921145,
+          12.9835214
+        ]
+      },
+      "properties": {
+        "node_id": "N016",
+        "location_name": "Guruvayurappan temple",
+        "node_type": "landmark_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2017099,
+          12.9893877
+        ]
+      },
+      "properties": {
+        "node_id": "N017",
+        "location_name": "Vinayaka Temple",
+        "node_type": "landmark_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.21957,
+          12.9673
+        ]
+      },
+      "properties": {
+        "node_id": "N018",
+        "location_name": "Velachery Railway Station Area",
+        "node_type": "transport_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.22201,
+          12.98287
+        ]
+      },
+      "properties": {
+        "node_id": "N019",
+        "location_name": "Dhandeeswaram Extension",
+        "node_type": "drainage_node"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          80.2210664,
+          12.975951
+        ]
+      },
+      "properties": {
+        "node_id": "N020",
+        "location_name": "Vijayanagar Velachery",
+        "node_type": "intersection"
+      }
+    }
+  ]
+}
