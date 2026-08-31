@@ -1,0 +1,21 @@
+node_id,total_inflow_L_min,outflow_L_min,accumulation_rate_L_min,stored_volume_L,estimated_depth_cm,status,location_name,elevation
+N001,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Vijaya Nagar,14.59
+N002,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Tansi Nagar,16.96
+N003,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery,8.84
+N004,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Dhandeeswaram,9.81
+N005,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Main Road,4.75
+N006,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Railway Station,6.45
+N007,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Ram Nagar,5.55
+N008,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Tansi Nagar Bus Stop,9.84
+N009,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Vijayanagar Bus Terminus,17.15
+N010,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Vijaynagar Area,5.74
+N011,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Lake,4.75
+N012,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Ram Nagar,11.17
+N013,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Sadasiva Nagar,9.98
+N014,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Andal Nagar,9.15
+N015,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Subramanya Temple,13.48
+N016,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Guruvayurappan temple,11.27
+N017,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Vinayaka Temple,11.12
+N018,460.42,400.0,60.42,906.25,0.91,Abnormal Accumulation,Velachery Railway Station Area,8.89
+N019,598.54,400.0,198.54,2978.12,2.98,Abnormal Accumulation,Dhandeeswaram Extension,10.0
+N020,598.54,200.0,398.54,5978.12,5.98,Abnormal Accumulation,Vijayanagar Velachery,5.0

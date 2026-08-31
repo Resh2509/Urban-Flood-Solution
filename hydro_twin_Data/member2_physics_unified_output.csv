@@ -1,0 +1,21 @@
+node_id,location_name,elevation_m,inflow_lps,outflow_lps,capacity_lps,accumulation_rate_lps,water_depth_cm,blockage_probability,blockage_status,surcharge_status,backflow_risk
+N001,Velachery Vijaya Nagar,14.59,10.03,6.67,388.33,3.37,3.03,0.0,Normal,Normal,False
+N002,Tansi Nagar,16.96,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N003,Velachery,8.84,10.03,6.67,1516.36,3.37,3.03,0.0,Normal,Normal,False
+N004,Dhandeeswaram,9.81,10.03,6.67,388.33,3.37,3.03,0.0,Normal,Normal,False
+N005,Velachery Main Road,4.75,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N006,Velachery Railway Station,6.45,10.03,6.67,1516.36,3.37,3.03,0.0,Normal,Normal,False
+N007,Ram Nagar,5.55,10.03,6.67,388.33,3.37,3.03,1.0,Severe_Blockage,Surcharged,True
+N008,Tansi Nagar Bus Stop,9.84,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N009,Velachery Vijayanagar Bus Terminus,17.15,10.03,6.67,1516.36,3.37,3.03,0.0,Normal,Normal,False
+N010,Vijaynagar Area,5.74,10.03,6.67,388.33,3.37,3.03,0.0,Normal,Normal,False
+N011,Velachery Lake,4.75,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N012,Ram Nagar,11.17,10.03,6.67,1516.36,3.37,3.03,1.0,Severe_Blockage,Surcharged,True
+N013,Sadasiva Nagar,9.98,10.03,6.67,388.33,3.37,3.03,0.0,Normal,Normal,False
+N014,Andal Nagar,9.15,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N015,Subramanya Temple,13.48,10.03,6.67,1516.36,3.37,3.03,0.0,Normal,Normal,False
+N016,Guruvayurappan temple,11.27,10.03,6.67,388.33,3.37,3.03,0.0,Normal,Normal,False
+N017,Vinayaka Temple,11.12,10.03,6.67,836.33,3.37,3.03,0.0,Normal,Normal,False
+N018,Velachery Railway Station Area,8.89,10.03,6.67,1516.36,3.37,3.03,0.0,Normal,Normal,False
+N019,Dhandeeswaram Extension,10.0,13.05,6.67,388.33,6.38,5.74,0.0,Normal,Normal,False
+N020,Vijayanagar Velachery,5.0,13.05,3.33,400.0,9.71,8.74,0.0,Normal,Normal,False

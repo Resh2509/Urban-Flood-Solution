@@ -1,0 +1,11 @@
+timestamp,node_id,rainfall_mm,flow_in_lps,flow_out_lps,water_level_cm,water_depth_cm_obs,water_accumulation_lps,water_depth_cm_lbl,flow_capacity_ratio,accumulation_rate,blockage_status,blockage_risk,flood_severity,predicted_blockage_status,blockage_probability
+2025-01-21 19:00:00,N011,0.0,8.25,5.97,8.42,3.42,2.28,3.6252,1.382,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N012,0.0,9.12,7.27,7.78,2.78,1.85,8.962406783932314,0.5935689147996491,1.821,Severe_Blockage,High,Moderate,Severe_Blockage,1.0
+2025-01-21 19:00:00,N013,0.0,14.93,14.14,6.19,1.19,0.79,1.30424,1.056,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N014,0.0,8.86,6.89,7.96,2.96,1.97,3.2974399999999995,1.286,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N015,0.0,7.58,5.79,7.69,2.69,1.79,18.21440132984572,0.4969557012992679,4.581,Severe_Blockage,High,High,Severe_Blockage,1.0
+2025-01-21 19:00:00,N016,0.0,12.27,10.45,7.73,2.73,1.82,3.1395,1.174,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N017,0.0,11.84,9.96,7.82,2.82,1.88,3.29376,1.189,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N018,0.0,10.74,8.75,7.98,2.98,1.99,3.53428,1.227,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N019,0.0,7.22,6.48,6.11,1.11,0.74,1.33644,1.114,0.0,Normal,Low,Low,Normal,0.0
+2025-01-21 19:00:00,N020,0.0,10.82,8.44,8.57,3.57,2.38,4.36254,1.282,0.0,Normal,Low,Low,Normal,0.0
