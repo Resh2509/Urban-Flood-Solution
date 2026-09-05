@@ -1,0 +1,32 @@
+{
+  "workers": [
+    {
+      "worker_id": "W009",
+      "latitude": 12.975951,
+      "longitude": 80.221064
+    },
+    {
+      "worker_id": "W010",
+      "latitude": 12.982800,
+      "longitude": 80.222010
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": "T009",
+      "latitude": 12.975500,
+      "longitude": 80.220500,
+      "priority_score": 95,
+      "severity": "Critical",
+      "deadline_minutes": 20
+    },
+    {
+      "task_id": "T010",
+      "latitude": 12.982300,
+      "longitude": 80.221500,
+      "priority_score": 80,
+      "severity": "High",
+      "deadline_minutes": 40
+    }
+  ]
+}
