@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        HydroGraph - Flood Aware Worker Routing
+    </title>
+
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f6f8;
+
+        }
+
+
+        .header {
+
+            background: #17324d;
+
+            color: white;
+
+            padding: 18px 25px;
+
+        }
+
+
+        .header h1 {
+
+            margin: 0;
+
+            font-size: 24px;
+
+        }
+
+
+        .header p {
+
+            margin:
+                6px 0 0;
+
+            font-size: 14px;
+
+            opacity: 0.9;
+
+        }
+
+
+        .controls {
+
+            background: white;
+
+            padding: 15px 25px;
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            box-shadow:
+                0 2px 5px
+                rgba(0,0,0,0.1);
+
+        }
+
+
+        .controls label {
+
+            font-weight: bold;
+
+        }
+
+
+        .controls input {
+
+            padding: 9px;
+
+            width: 120px;
+
+            border:
+                1px solid #ccc;
+
+            border-radius: 5px;
+
+        }
+
+
+        .controls button {
+
+            padding:
+                10px 18px;
+
+            border: none;
+
+            border-radius: 5px;
+
+            background: #1769aa;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .controls button:hover {
+
+            opacity: 0.85;
+
+        }
+
+
+        #map {
+
+            height: 600px;
+
+            width: 100%;
+
+        }
+
+
+        .info-panel {
+
+            background: white;
+
+            padding: 15px 25px;
+
+            display: flex;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+
+            border-top:
+                1px solid #ddd;
+
+        }
+
+
+        .info-card {
+
+            min-width: 180px;
+
+        }
+
+
+        .info-card h3 {
+
+            margin:
+                0 0 5px;
+
+            font-size: 14px;
+
+            color: #666;
+
+        }
+
+
+        .info-card p {
+
+            margin: 0;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+        }
+
+
+        .legend {
+
+            background: white;
+
+            padding: 10px;
+
+            line-height: 22px;
+
+            border-radius: 5px;
+
+            box-shadow:
+                0 1px 5px
+                rgba(0,0,0,0.3);
+
+        }
+
+
+        .legend-item {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+        }
+
+
+        .legend-color {
+
+            width: 18px;
+
+            height: 5px;
+
+        }
+
+
+        .status {
+
+            padding:
+                10px 25px;
+
+            background: #eef5ff;
+
+            color: #17324d;
+
+            font-weight: bold;
+
+        }
+
+
+        .error {
+
+            background: #ffecec;
+
+            color: #a00000;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="header">
+
+        <h1>
+            HydroGraph
+            — Flood-Aware Worker Routing
+        </h1>
+
+        <p>
+            Velachery Emergency Response Map
+        </p>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- CONTROLS -->
+    <!-- ================================================= -->
+
+    <div class="controls">
+
+        <label>
+            Assignment ID:
+        </label>
+
+        <input
+            type="text"
+            id="assignmentId"
+            value="A008"
+        >
+
+        <button
+            onclick="loadRoute()"
+        >
+            Show Route
+        </button>
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- STATUS -->
+    <!-- ================================================= -->
+
+    <div
+        id="status"
+        class="status"
+    >
+
+        Enter an assignment ID
+        and click "Show Route".
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- MAP -->
+    <!-- ================================================= -->
+
+    <div id="map"></div>
+
+
+    <!-- ================================================= -->
+    <!-- INFORMATION -->
+    <!-- ================================================= -->
+
+    <div class="info-panel">
+
+
+        <div class="info-card">
+
+            <h3>
+                Assignment
+            </h3>
+
+            <p id="assignmentInfo">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                Worker
+            </h3>
+
+            <p id="workerInfo">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                Destination
+            </h3>
+
+            <p id="destinationInfo">
+                -
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <h3>
+                Flooded Roads
+            </h3>
+
+            <p id="floodInfo">
+                0
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ================================================= -->
+    <!-- LEAFLET JS -->
+    <!-- ================================================= -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+    <script>
+
+        // ==================================================
+        // INITIAL MAP
+        // ==================================================
+
+        const map = L.map(
+            "map"
+        ).setView(
+            [
+                12.9755,
+                80.2205
+            ],
+            14
+        );
+
+
+        // ==================================================
+        // OPENSTREETMAP TILE LAYER
+        // ==================================================
+
+        L.tileLayer(
+
+            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+            {
+
+                maxZoom: 19,
+
+                attribution:
+                    "&copy; OpenStreetMap contributors"
+
+            }
+
+        ).addTo(map);
+
+
+        // ==================================================
+        // LAYERS
+        // ==================================================
+
+        let workerMarker = null;
+
+        let destinationMarker = null;
+
+        let routeLine = null;
+
+        let floodedLines = [];
+
+
+        // ==================================================
+        // WORKER ICON
+        // ==================================================
+
+        const workerIcon =
+            L.divIcon({
+
+                className:
+                    "worker-icon",
+
+                html:
+                    `<div style="
+                        background:#1769aa;
+                        color:white;
+                        width:32px;
+                        height:32px;
+                        border-radius:50%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:17px;
+                        border:3px solid white;
+                        box-shadow:0 2px 6px rgba(0,0,0,.4);
+                    ">W</div>`,
+
+                iconSize:
+                    [32, 32],
+
+                iconAnchor:
+                    [16, 16]
+
+            });
+
+
+        // ==================================================
+        // DESTINATION ICON
+        // ==================================================
+
+        const destinationIcon =
+            L.divIcon({
+
+                className:
+                    "destination-icon",
+
+                html:
+                    `<div style="
+                        background:#d71920;
+                        color:white;
+                        width:34px;
+                        height:34px;
+                        border-radius:50%;
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        font-size:16px;
+                        border:3px solid white;
+                        box-shadow:0 2px 6px rgba(0,0,0,.4);
+                    ">D</div>`,
+
+                iconSize:
+                    [34, 34],
+
+                iconAnchor:
+                    [17, 17]
+
+            });
+
+
+        // ==================================================
+        // LOAD ROUTE
+        // ==================================================
+
+        async function loadRoute() {
+
+
+            const assignmentId =
+                document
+                .getElementById(
+                    "assignmentId"
+                )
+                .value
+                .trim();
+
+
+            if (!assignmentId) {
+
+                showError(
+                    "Please enter an assignment ID."
+                );
+
+                return;
+
+            }
+
+
+            setStatus(
+                "Loading route..."
+            );
+
+
+            try {
+
+
+                // ------------------------------------------
+                // Call routing API
+                // ------------------------------------------
+
+                const response =
+                    await fetch(
+
+                        `/api/routes/${assignmentId}`,
+
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            }
+
+                        }
+
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to load route."
+                    );
+
+                }
+
+
+                // ------------------------------------------
+                // Clear previous map data
+                // ------------------------------------------
+
+                clearMap();
+
+
+                // ------------------------------------------
+                // Worker
+                // ------------------------------------------
+
+                const worker =
+                    data.worker;
+
+
+                const workerPosition = [
+
+                    worker.latitude,
+
+                    worker.longitude
+
+                ];
+
+
+                workerMarker =
+                    L.marker(
+
+                        workerPosition,
+
+                        {
+                            icon:
+                                workerIcon
+                        }
+
+                    )
+                    .addTo(map)
+                    .bindPopup(
+
+                        `<b>Worker</b><br>
+                         ID: ${worker.worker_id}<br>
+                         Name: ${worker.worker_name}<br>
+                         Latitude: ${worker.latitude}<br>
+                         Longitude: ${worker.longitude}`
+
+                    );
+
+
+                // ------------------------------------------
+                // Destination
+                // ------------------------------------------
+
+                const destination =
+                    data.destination;
+
+
+                const destinationPosition = [
+
+                    destination.latitude,
+
+                    destination.longitude
+
+                ];
+
+
+                destinationMarker =
+                    L.marker(
+
+                        destinationPosition,
+
+                        {
+                            icon:
+                                destinationIcon
+                        }
+
+                    )
+                    .addTo(map)
+                    .bindPopup(
+
+                        `<b>Destination</b><br>
+                         Task: ${destination.task_id}<br>
+                         Node: ${destination.node_id}<br>
+                         Severity: ${destination.severity}<br>
+                         Priority: ${destination.priority_score}`
+
+                    );
+
+
+                // ------------------------------------------
+                // Recommended route
+                // ------------------------------------------
+
+                if (
+
+                    data.route_coordinates &&
+
+                    data.route_coordinates.length > 0
+
+                ) {
+
+
+                    routeLine =
+                        L.polyline(
+
+                            data.route_coordinates,
+
+                            {
+
+                                weight: 6,
+
+                                opacity: 0.9
+
+                            }
+
+                        )
+                        .addTo(map);
+
+
+                }
+
+
+                // ------------------------------------------
+                // Flooded roads
+                // ------------------------------------------
+
+                const floodedSegments =
+                    data.flooded_segments || [];
+
+
+                floodedSegments.forEach(
+
+                    segment => {
+
+
+                        if (
+
+                            segment.coordinates &&
+
+                            segment.coordinates.length > 0
+
+                        ) {
+
+
+                            const line =
+                                L.polyline(
+
+                                    segment.coordinates,
+
+                                    {
+
+                                        weight: 8,
+
+                                        opacity: 0.9
+
+                                    }
+
+                                )
+                                .addTo(map);
+
+
+                            line.bindPopup(
+
+                                `<b>Flooded Road</b><br>
+                                 Depth:
+                                 ${segment.depth_cm} cm`
+
+                            );
+
+
+                            floodedLines.push(
+                                line
+                            );
+
+                        }
+
+                    }
+
+                );
+
+
+                // ------------------------------------------
+                // Fit map to worker + destination + route
+                // ------------------------------------------
+
+                const bounds =
+                    L.latLngBounds([]);
+
+
+                bounds.extend(
+                    workerPosition
+                );
+
+
+                bounds.extend(
+                    destinationPosition
+                );
+
+
+                if (
+                    data.route_coordinates
+                ) {
+
+                    data.route_coordinates
+                        .forEach(
+                            point => {
+
+                                bounds.extend(
+                                    point
+                                );
+
+                            }
+                        );
+
+                }
+
+
+                map.fitBounds(
+                    bounds,
+                    {
+                        padding:
+                            [40, 40]
+                    }
+                );
+
+
+                // ------------------------------------------
+                // Update information
+                // ------------------------------------------
+
+                document
+                    .getElementById(
+                        "assignmentInfo"
+                    )
+                    .textContent =
+                    data.assignment_id;
+
+
+                document
+                    .getElementById(
+                        "workerInfo"
+                    )
+                    .textContent =
+                    `${worker.worker_id}
+                     — ${worker.worker_name}`;
+
+
+                document
+                    .getElementById(
+                        "destinationInfo"
+                    )
+                    .textContent =
+                    `${destination.task_id}
+                     — ${destination.node_id}`;
+
+
+                document
+                    .getElementById(
+                        "floodInfo"
+                    )
+                    .textContent =
+                    floodedSegments.length;
+
+
+                // ------------------------------------------
+                // Success message
+                // ------------------------------------------
+
+                setStatus(
+
+                    "Route loaded successfully. " +
+                    "Worker → Destination route displayed."
+
+                );
+
+
+            }
+
+            catch (error) {
+
+
+                console.error(
+                    error
+                );
+
+
+                showError(
+                    error.message
+                );
+
+            }
+
+        }
+
+
+        // ==================================================
+        // CLEAR MAP
+        // ==================================================
+
+        function clearMap() {
+
+
+            if (workerMarker) {
+
+                map.removeLayer(
+                    workerMarker
+                );
+
+                workerMarker = null;
+
+            }
+
+
+            if (destinationMarker) {
+
+                map.removeLayer(
+                    destinationMarker
+                );
+
+                destinationMarker = null;
+
+            }
+
+
+            if (routeLine) {
+
+                map.removeLayer(
+                    routeLine
+                );
+
+                routeLine = null;
+
+            }
+
+
+            floodedLines.forEach(
+
+                line => {
+
+                    map.removeLayer(
+                        line
+                    );
+
+                }
+
+            );
+
+
+            floodedLines = [];
+
+        }
+
+
+        // ==================================================
+        // STATUS
+        // ==================================================
+
+        function setStatus(
+            message
+        ) {
+
+            const status =
+                document
+                .getElementById(
+                    "status"
+                );
+
+
+            status.className =
+                "status";
+
+
+            status.textContent =
+                message;
+
+        }
+
+
+        // ==================================================
+        // ERROR
+        // ==================================================
+
+        function showError(
+            message
+        ) {
+
+            const status =
+                document
+                .getElementById(
+                    "status"
+                );
+
+
+            status.className =
+                "status error";
+
+
+            status.textContent =
+                "Error: " +
+                message;
+
+        }
+
+
+        // ==================================================
+        // AUTOMATICALLY LOAD A008
+        // ==================================================
+
+        loadRoute();
+
+    </script>
+
+
+</body>
+
+</html>

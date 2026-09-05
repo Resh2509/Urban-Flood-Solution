@@ -1,0 +1,20 @@
+{
+    "worker": {
+        "worker_id": "W009",
+        "latitude": 12.975951,
+        "longitude": 80.221064
+    },
+    "task": {
+        "task_id": "T009",
+        "node_id": "N003",
+        "latitude": 12.975500,
+        "longitude": 80.220500
+    },
+    "flooded_edges": [
+        {
+            "u": 338406860,
+            "v": 12497489527,
+            "depth_cm": 60
+        }
+    ]
+}
