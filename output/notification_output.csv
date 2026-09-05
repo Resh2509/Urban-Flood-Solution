@@ -1,0 +1,57 @@
+worker_id,worker_name,phone,urgency,priority_score,target_location,target_node,safe_path,safe_distance_m,sms_payload
+W001,David Paul,+91-9840123401,Critical,90,Ram Nagar Canal,N012,N001 -> N002 -> N008 -> N009 -> N003 -> N006 -> N012,2871.63,"🚨 URGENT MUNICIPAL DISPATCH [CRITICAL PRIORITY: 90/100] 🚨
+Dear David Paul (Drainage Technician),
+Task: Deploy High-Capacity Dewatering Pump
+Location: Ram Nagar Canal (N012)
+Predicted Water Inundation: 15.2 cm
+Safe Navigation Route: N001 -> N002 -> N008 -> N009 -> N003 -> N006 -> N012
+Total Distance: 2871.63 m | Status: Alternative Safe Route"
+W002,Joseph Samuel,+91-9840123402,High,75,Vijaynagar Intersection,N010,N002 -> N008 -> N009 -> N010,788.01,"🚨 URGENT MUNICIPAL DISPATCH [HIGH PRIORITY: 75/100] 🚨
+Dear Joseph Samuel (Emergency Response Driver),
+Task: Clear Inlet Grate Trash Blockage
+Location: Vijaynagar Intersection (N010)
+Predicted Water Inundation: 8.5 cm
+Safe Navigation Route: N002 -> N008 -> N009 -> N010
+Total Distance: 788.01 m | Status: Direct Route"
+W003,John Victor,+91-9840123403,Low,45,Dhandeeswaram Extension,N019,N004 -> N019,12.98,"🚨 URGENT MUNICIPAL DISPATCH [LOW PRIORITY: 45/100] 🚨
+Dear John Victor (Hydraulic Supervisor),
+Task: Depression Area Catchment Monitoring
+Location: Dhandeeswaram Extension (N019)
+Predicted Water Inundation: 3.5 cm
+Safe Navigation Route: N004 -> N019
+Total Distance: 12.98 m | Status: Direct Route"
+W004,Daniel Raj,+91-9840123404,High,80,Velachery Main Canal,N003,N006 -> N003,0.0,"🚨 URGENT MUNICIPAL DISPATCH [HIGH PRIORITY: 80/100] 🚨
+Dear Daniel Raj (Pump Operator),
+Task: Trunk Canal Overcapacity Sluice Operation
+Location: Velachery Main Canal (N003)
+Predicted Water Inundation: 10.4 cm
+Safe Navigation Route: N006 -> N003
+Total Distance: 0.0 m | Status: Direct Route"
+W005,Stephen George,+91-9840123405,Medium,65,Velachery Main Road,N005,N008 -> N002 -> N001 -> N004 -> N005,1293.11,"🚨 URGENT MUNICIPAL DISPATCH [MEDIUM PRIORITY: 65/100] 🚨
+Dear Stephen George (Drainage Technician),
+Task: Surface Water Flow Diversion
+Location: Velachery Main Road (N005)
+Predicted Water Inundation: 6.2 cm
+Safe Navigation Route: N008 -> N002 -> N001 -> N004 -> N005
+Total Distance: 1293.11 m | Status: Alternative Safe Route"
+W006,Antony Francis,+91-9840123406,High,85,Vijayanagar Velachery,N020,N009 -> N010 -> N020,0.89,"🚨 URGENT MUNICIPAL DISPATCH [HIGH PRIORITY: 85/100] 🚨
+Dear Antony Francis (Field Inspector),
+Task: Mitigate Low-Area Surcharge & Inundation
+Location: Vijayanagar Velachery (N020)
+Predicted Water Inundation: 12.8 cm
+Safe Navigation Route: N009 -> N010 -> N020
+Total Distance: 0.89 m | Status: Direct Route"
+W008,Joshua Philip,+91-9840123408,Critical,95,Ram Nagar,N007,N013 -> N007,460.81,"🚨 URGENT MUNICIPAL DISPATCH [CRITICAL PRIORITY: 95/100] 🚨
+Dear Joshua Philip (Drainage Technician),
+Task: Clear Severe Pipe Blockage
+Location: Ram Nagar (N007)
+Predicted Water Inundation: 18.5 cm
+Safe Navigation Route: N013 -> N007
+Total Distance: 460.81 m | Status: Direct Route"
+W009,Simon Peter,+91-9840123409,Medium,55,Andal Nagar,N014,N015 -> N014,508.9,"🚨 URGENT MUNICIPAL DISPATCH [MEDIUM PRIORITY: 55/100] 🚨
+Dear Simon Peter (Pump Operator),
+Task: Inspect Surcharge & Backflow Valve
+Location: Andal Nagar (N014)
+Predicted Water Inundation: 4.8 cm
+Safe Navigation Route: N015 -> N014
+Total Distance: 508.9 m | Status: Direct Route"

@@ -1,0 +1,9 @@
+task_id,node_id,location_name,latitude,longitude,task_type,priority_score,urgency,estimated_water_depth_cm,required_skill,status
+T001,N007,Ram Nagar,12.965273,80.207104,Clear Severe Pipe Blockage,95,Critical,18.5,Desilting,Pending
+T002,N012,Ram Nagar Canal,12.965356,80.211813,Deploy High-Capacity Dewatering Pump,90,Critical,15.2,Pumping,Pending
+T003,N020,Vijayanagar Velachery,12.975951,80.221066,Mitigate Low-Area Surcharge & Inundation,85,High,12.8,Pumping,Pending
+T004,N003,Velachery Main Canal,12.967299,80.219571,Trunk Canal Overcapacity Sluice Operation,80,High,10.4,Inspection,Pending
+T005,N010,Vijaynagar Intersection,12.975950,80.221070,Clear Inlet Grate Trash Blockage,75,High,8.5,Desilting,Pending
+T006,N005,Velachery Main Road,12.980170,80.222850,Surface Water Flow Diversion,65,Medium,6.2,Inspection,Pending
+T007,N014,Andal Nagar,12.981010,80.206669,Inspect Surcharge & Backflow Valve,55,Medium,4.8,Inspection,Pending
+T008,N019,Dhandeeswaram Extension,12.982870,80.222010,Depression Area Catchment Monitoring,45,Low,3.5,Desilting,Pending

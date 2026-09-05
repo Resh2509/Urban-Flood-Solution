@@ -1,0 +1,11 @@
+worker_id,name,role,phone,current_node,latitude,longitude,availability,assigned_task,skill
+W001,David Paul,Drainage Technician,+91-9840123401,N001,12.978625,80.221580,Available,None,Desilting
+W002,Joseph Samuel,Emergency Response Driver,+91-9840123402,N002,12.977460,80.223450,Available,None,Pumping
+W003,John Victor,Hydraulic Supervisor,+91-9840123403,N004,12.982980,80.221970,Available,None,Inspection
+W004,Daniel Raj,Pump Operator,+91-9840123404,N006,12.967299,80.219571,Available,None,Pumping
+W005,Stephen George,Drainage Technician,+91-9840123405,N008,12.978550,80.225360,Available,None,Desilting
+W006,Antony Francis,Field Inspector,+91-9840123406,N009,12.975951,80.221066,Available,None,Inspection
+W007,Michael Gabriel,Heavy Equipment Operator,+91-9840123407,N011,12.985790,80.220750,Available,None,Excavation
+W008,Joshua Philip,Drainage Technician,+91-9840123408,N013,12.965129,80.202854,Available,None,Desilting
+W009,Simon Peter,Pump Operator,+91-9840123409,N015,12.985279,80.204976,Available,None,Pumping
+W010,Emmanuel Xavier,Emergency Rescue Squad,+91-9840123410,N017,12.989388,80.201710,Available,None,Rescue

@@ -1,0 +1,9 @@
+worker_id,worker_name,worker_role,phone,start_node,task_id,target_node,location_name,task_type,priority_score,urgency,distance_m
+W001,David Paul,Drainage Technician,+91-9840123401,N001,T002,N012,Ram Nagar Canal,Deploy High-Capacity Dewatering Pump,90,Critical,1815.76
+W002,Joseph Samuel,Emergency Response Driver,+91-9840123402,N002,T005,N010,Vijaynagar Intersection,Clear Inlet Grate Trash Blockage,75,High,307.73
+W003,John Victor,Hydraulic Supervisor,+91-9840123403,N004,T008,N019,Dhandeeswaram Extension,Depression Area Catchment Monitoring,45,Low,12.98
+W004,Daniel Raj,Pump Operator,+91-9840123404,N006,T004,N003,Velachery Main Canal,Trunk Canal Overcapacity Sluice Operation,80,High,0.0
+W005,Stephen George,Drainage Technician,+91-9840123405,N008,T006,N005,Velachery Main Road,Surface Water Flow Diversion,65,Medium,326.21
+W006,Antony Francis,Field Inspector,+91-9840123406,N009,T003,N020,Vijayanagar Velachery,Mitigate Low-Area Surcharge & Inundation,85,High,0.0
+W008,Joshua Philip,Drainage Technician,+91-9840123408,N013,T001,N007,Ram Nagar,Clear Severe Pipe Blockage,95,Critical,460.81
+W009,Simon Peter,Pump Operator,+91-9840123409,N015,T007,N014,Andal Nagar,Inspect Surcharge & Backflow Valve,55,Medium,508.9
